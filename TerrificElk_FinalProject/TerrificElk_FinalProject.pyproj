@@ -30,7 +30,11 @@
     <Folder Include="mainPackage\" />
     <Folder Include="moviedecryptionPackage\" />
     <Folder Include="buildingdecryptionPackage\" />
+    <Folder Include="data\" />
     <Folder Include="photoimportPackage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\FinalProjectImage.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

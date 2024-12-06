@@ -35,7 +35,7 @@ def main():
     print(f"Decrypted Movie Title: {movie_title}")
 
     # Display the photo 
-    photo_module.display_photo(photo_path)
+    photo_module.display_photo("C:\Users\benja\source\repos\TerrificElk_FinalProject\TerrificElk_FinalProject\data\FinalProjectImage.jpeg")
 
 if __name__ == "__main__":
     main()
