@@ -16,7 +16,7 @@ from photoimportPackage.photoimport import display_photo as photo_module
 
 def main():
     # File paths
-    words_file_path = r'C:\Users\benja\Downloads\Final Project IS4010-001 Fall 2024-1-2 (1)\UCEnglish.txt'
+    words_file_path = r'C:\Users\benja\source\repos\TerrificElk_FinalProject\TerrificElk_FinalProject\data\UCEnglish.txt'
     encrypted_numbers = ["7480", "28894", "8018", "42049", "46049", "7487", "18797", "28898", "10953", "31563", "28799", "10355", "2756", "23887", "30997", "42547", "5209", "42686", "14761", "38919"]
 
     # Encrypted movie title and key
