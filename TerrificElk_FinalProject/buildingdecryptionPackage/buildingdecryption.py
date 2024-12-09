@@ -15,9 +15,16 @@
 import json
 
 def get_group_numbers(json_file_path, group_name):
-    with open(json_file_path, 'r', encoding='utf-8') as file:
-        data = json.load(file)
-   
+    try:
+        with open(json_file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+    except json.JSONDecodeError as e:
+        print(f"Error reading JSON file: {e}")
+        return None
+    except FileNotFoundError:
+        print(f"Error: The file {json_file_path} was not found.")
+        return None
+
     if group_name in data:
         return data[group_name]
     else:
