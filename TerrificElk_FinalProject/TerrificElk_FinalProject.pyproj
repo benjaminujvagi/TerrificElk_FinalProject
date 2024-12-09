@@ -22,11 +22,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="buildingdecryptionPackage\buildingdecryption.py" />
+    <Compile Include="JSONPackage\json_reader.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mainPackage\main.py" />
     <Compile Include="moviedecryptionPackage\moviedecryption.py" />
     <Compile Include="photoimportPackage\photoimport.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="JSONPackage\" />
     <Folder Include="mainPackage\" />
     <Folder Include="moviedecryptionPackage\" />
     <Folder Include="buildingdecryptionPackage\" />
