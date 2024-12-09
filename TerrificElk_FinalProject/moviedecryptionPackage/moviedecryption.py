@@ -12,8 +12,7 @@
 # Citations: Microsoft Copilot
 
 from cryptography.fernet import Fernet
-
-
+import json
 
 """
     Decrypts an encrypted message using a Fernet key.
@@ -26,7 +25,10 @@ from cryptography.fernet import Fernet
         str: The decrypted message.
 """
 
-def decrypt_message_fernet(encrypted_message, key):
-    fernet = Fernet(key)
-    decrypted_message = fernet.decrypt(encrypted_message.encode())
-    return decrypted_message.decode()
+def get_encrypted_movie_title(json_file_path, team_name):
+    with open(json_file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    for team in data["teams"]:
+        if team["name"] == team_name:
+            return team["encrypted_movie_title"]
+    return None
