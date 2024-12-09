@@ -11,12 +11,10 @@
 # Citations: Microsoft Copilot
 # buildingdecryption.py 
 #buildingdecryption.py
-
 import json
 
 def get_group_numbers(json_file_path, group_name):
     try:
-        print(f"JSON file path: {json_file_path}")  # Debug print
         with open(json_file_path, 'r', encoding='utf-8') as file:
             data = json.load(file)
     except json.JSONDecodeError as e:
@@ -25,11 +23,9 @@ def get_group_numbers(json_file_path, group_name):
     except FileNotFoundError:
         print(f"Error: The file {json_file_path} was not found.")
         return None
-    except TypeError as e:
-        print(f"TypeError: {e}")
-        return None
 
     if group_name in data:
         return data[group_name]
     else:
         return None
+
