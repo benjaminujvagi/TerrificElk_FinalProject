@@ -10,11 +10,15 @@
 # Brief Description of what this module does. decrypts the building location 
 # Citations: Microsoft Copilot
 # buildingdecryption.py 
-import json 
-def get_group_numbers(json_file_path, group_name): 
-    with open(json_file_path, 'r', encoding='utf-8') as file: 
-        data = json.load(file) 
-    for group in data["groups"]: 
-        if group["name"] == group_name: 
-            return group["numbers"] 
-    return None
+#buildingdecryption.py
+
+import json
+
+def get_group_numbers(json_file_path, group_name):
+    with open(json_file_path, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+   
+    if group_name in data:
+        return data[group_name]
+    else:
+        return None
