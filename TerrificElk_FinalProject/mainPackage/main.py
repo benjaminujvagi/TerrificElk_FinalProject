@@ -10,12 +10,12 @@
 # Citations: Microsoft Copilot
 
 import os
-from buildingdecryptionPackage.buildingdecryption import file_reader as building_file_reader
-from buildingdecryptionPackage.buildingdecryption import decryptor as building_decryptor
-from buildingdecryptionPackage.buildingdecryption import json_reader as building_json_reader
-from moviedecryptionPackage.moviedecryption import decryptor as movie_decryptor
-from moviedecryptionPackage.moviedecryption import json_reader as movie_json_reader
-from photoimportPackage.photoimport import photo as photo_module
+from buildingdecryptionPackage.buildingdecryption import get_group_numbers as building_file_reader
+#from buildingdecryptionPackage.buildingdecryption import decryptor as building_decryptor
+#from buildingdecryptionPackage.buildingdecryption import json_reader as building_json_reader
+from moviedecryptionPackage.moviedecryption import get_encrypted_movie_title as movie_decryptor
+#from moviedecryptionPackage.moviedecryption import json_reader as movie_json_reader
+from photoimportPackage.photoimport import display_photo as photo_module
 
 def main():
     # File paths
@@ -29,35 +29,43 @@ def main():
     team_name = "Complete Duck"
     
     # Key for decryption
-    # We used Complete Duck's Key instead of our own
     key = b'WVRqW7wUIQ1mgbz5PAonHGJn-XknVdDV74L_RNFjU0o='
     
-    # Get the numbers for the specified group from the JSON file
-    encrypted_numbers = building_json_reader.get_group_numbers(group_json_file_path, group_name)
-    if encrypted_numbers is None:
-        print(f"Group '{group_name}' not found in JSON file.")
+    try:
+        # Get the numbers for the specified group from the JSON file
+        encrypted_numbers = building_file_reader(group_json_file_path, group_name)
+        if encrypted_numbers is None:
+            print(f"Group '{group_name}' not found in JSON file.")
+            return
+    except ValueError as ve:
+        print(f"Error: {ve}")
         return
-    
-    # Get the encrypted movie title for the specified team from the JSON file
-    encrypted_movie_title = movie_json_reader.get_encrypted_movie_title(movie_json_file_path, team_name)
-    if encrypted_movie_title is None:
-        print(f"Team '{team_name}' not found in JSON file.")
+
+    try:
+        # Get the encrypted movie title for the specified team from the JSON file
+        encrypted_movie_title = movie_decryptor(movie_json_file_path, team_name)
+        if encrypted_movie_title is None:
+            print(f"Team '{team_name}' not found in JSON file.")
+            return
+    except ValueError as ve:
+        print(f"Error: {ve}")
         return
     
     # Read the words from the .txt file for the location decryption
-    words = building_file_reader.read_words(words_file_path)
+    words = building_file_reader(words_file_path)
     
     # Decrypt the location
-    location = building_decryptor.decrypt_location(encrypted_numbers, words)
+    location = building_file_reader(encrypted_numbers, words)
     print(f"Decrypted Location: {location}")
     
     # Decrypt the movie title
-    movie_title = movie_decryptor.decrypt_message_fernet(encrypted_movie_title, key)
+    movie_title = movie_decryptor(encrypted_movie_title, key)
     print(f"Decrypted Movie Title: {movie_title}")
     
     # Display the photo
-    photo_module.display_photo(photo_path)
+    photo_module(photo_path)
 
 if __name__ == "__main__":
     main()
+
 
