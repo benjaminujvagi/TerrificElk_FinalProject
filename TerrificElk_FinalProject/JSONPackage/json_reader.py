@@ -33,8 +33,8 @@ class JSONDecryptor:
             """
             json_data = self.load_json()
 
-            #
-            decryted_data = {}
+            # Assuming the JSON contains encrypted fields
+            decrypted_data = {}
             for key, value in json_data.items():
                 decrypted_data[key] = self.decrypt_data(value)
 
@@ -42,6 +42,7 @@ class JSONDecryptor:
 
         def find_team_hint(self, team_name):
             """
+            Finds and returns the hint for specified team
             """
             decrypted_data = self.process_json()
             team_hint = decrypted_data.get(team_name)
