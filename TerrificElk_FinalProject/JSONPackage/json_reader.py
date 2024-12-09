@@ -34,7 +34,7 @@ class JSONDecryptor:
             json_data = self.load_json()
 
             #
-            decryted_data = {}
+            decrypted_data = {}
             for key, value in json_data.items():
                 decrypted_data[key] = self.decrypt_data(value)
 
