@@ -34,3 +34,31 @@ def get_group_numbers(json_file_path, group_name):
     else:
         return None
 
+def read_words(file_path):
+    try:
+        print(f"Reading words from: {file_path}")  # Debug print
+        with open(file_path, 'r', encoding='utf-8') as file:
+            words = file.read().splitlines()
+        return words
+    except FileNotFoundError:
+        print(f"Error: The file {file_path} was not found.")
+        return []
+    except Exception as e:
+        print(f"Error reading file {file_path}: {e}")
+        return []
+
+def decrypt_location(encrypted_numbers, words):
+    # Example decryption logic using the provided numbers and words list
+    try:
+        location = ' '.join(words[int(num)] for num in encrypted_numbers)
+        return location
+    except IndexError as e:
+        print(f"Error: One of the numbers is out of bounds in the word list: {e}")
+        return ""
+    except ValueError as e:
+        print(f"Error: Invalid number format in encrypted numbers: {e}")
+        return ""
+    except Exception as e:
+        print(f"Unexpected error during decryption: {e}")
+        return ""
+
