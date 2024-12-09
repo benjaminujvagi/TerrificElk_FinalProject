@@ -34,7 +34,9 @@
     <Folder Include="photoimportPackage\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\EncryptedGroupHints Fall 2024 Section 001.json" />
     <Content Include="data\FinalProjectImage.jpeg" />
+    <Content Include="data\TeamsAndEncryptedMessagesForDistribution.json" />
     <Content Include="data\UCEnglish.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

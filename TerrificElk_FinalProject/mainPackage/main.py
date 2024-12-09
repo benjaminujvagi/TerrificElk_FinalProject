@@ -9,33 +9,55 @@
 # Brief Description of what this module does. In this module, we call everything together and print it out
 # Citations: Microsoft Copilot
 
-from buildingdecryptionPackage.buildingdecryption import read_words as building_file_reader
-from buildingdecryptionPackage.buildingdecryption import decrypt_location as building_decryptor
-from moviedecryptionPackage.moviedecryption import decrypt_message_fernet as movie_decryptor
-from photoimportPackage.photoimport import display_photo as photo_module
+import os
+from buildingdecryptionPackage.buildingdecryption import file_reader as building_file_reader
+from buildingdecryptionPackage.buildingdecryption import decryptor as building_decryptor
+from buildingdecryptionPackage.buildingdecryption import json_reader as building_json_reader
+from moviedecryptionPackage.moviedecryption import decryptor as movie_decryptor
+from moviedecryptionPackage.moviedecryption import json_reader as movie_json_reader
+from photoimportPackage.photoimport import photo as photo_module
 
 def main():
     # File paths
-    words_file_path = r'data\UCEnglish.txt'
-    encrypted_numbers = ["7480", "28894", "8018", "42049", "46049", "7487", "18797", "28898", "10953", "31563", "28799", "10355", "2756", "23887", "30997", "42547", "5209", "42686", "14761", "38919"]
-
-    # Encrypted movie title and key
-    encrypted_movie_title = 'gAAAAABnJ6xXc8WnJ2DxuUMI3yz9g4ZaGNGUd6TPU96o-rmP1YfrxSq387RxZtyEt2Hc1WNWXcsUaz5oWJGd_W7Gs6wNXMoDG7bnwSawyeXVmuNEP88HlA8='
+    group_json_file_path = os.path.join('data', 'EncryptedGroupHints Fall 2024 Section 001.json')
+    words_file_path = os.path.join('data', 'UCEnglish.txt')
+    photo_path = os.path.join('data', 'FinalProjectImage.jpeg')
+    movie_json_file_path = os.path.join('data', 'TeamsAndEncryptedMessagesForDistribution.json')
+    
+    # Group name and team name
+    group_name = "TerrificElk"
+    team_name = "Complete Duck"
+    
+    # Key for decryption
+    # We used Complete Duck's Key instead of our own
     key = b'WVRqW7wUIQ1mgbz5PAonHGJn-XknVdDV74L_RNFjU0o='
-
+    
+    # Get the numbers for the specified group from the JSON file
+    encrypted_numbers = building_json_reader.get_group_numbers(group_json_file_path, group_name)
+    if encrypted_numbers is None:
+        print(f"Group '{group_name}' not found in JSON file.")
+        return
+    
+    # Get the encrypted movie title for the specified team from the JSON file
+    encrypted_movie_title = movie_json_reader.get_encrypted_movie_title(movie_json_file_path, team_name)
+    if encrypted_movie_title is None:
+        print(f"Team '{team_name}' not found in JSON file.")
+        return
+    
     # Read the words from the .txt file for the location decryption
-    words = building_file_reader(words_file_path)
-
+    words = building_file_reader.read_words(words_file_path)
+    
     # Decrypt the location
-    location = building_decryptor(encrypted_numbers, words)
+    location = building_decryptor.decrypt_location(encrypted_numbers, words)
     print(f"Decrypted Location: {location}")
-
+    
     # Decrypt the movie title
-    movie_title = movie_decryptor(encrypted_movie_title, key)
+    movie_title = movie_decryptor.decrypt_message_fernet(encrypted_movie_title, key)
     print(f"Decrypted Movie Title: {movie_title}")
-
-    # Display the photo 
-    photo_module(r'data\FinalProjectImage.jpeg')
+    
+    # Display the photo
+    photo_module.display_photo(photo_path)
 
 if __name__ == "__main__":
     main()
+
