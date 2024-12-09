@@ -16,7 +16,7 @@ class JSONDecryptor:
             """
             Loads and parses JSON file
             """
-            with open(self.json_path, 'r') as files:
+            with open(self.json_path, 'r') as file:
                 data = json.load(file)
             return data
 
