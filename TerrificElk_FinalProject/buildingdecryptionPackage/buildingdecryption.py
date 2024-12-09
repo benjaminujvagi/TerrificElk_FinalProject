@@ -7,7 +7,7 @@
 # Semester/Year:  Fall 2024
 # Brief Description of the assignment: decrypt two different codes and take a picture at the location
 
-# Brief Description of what this module does. decrypts the building location 
+# Brief Description of what this module does. decrypts the building location using json
 # Citations: Microsoft Copilot
 # buildingdecryption.py 
 #buildingdecryption.py
