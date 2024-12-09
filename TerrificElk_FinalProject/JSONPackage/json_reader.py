@@ -40,3 +40,11 @@ class JSONDecryptor:
 
             return decrypted_data
 
+        def find_team_hint(self, team_name):
+            """
+            """
+            decrypted_data = self.process_json()
+            team_hint = decrypted_data.get(team_name)
+            if not team_hint:
+                raise KeyError(f"Hint for team '(team_name)' not found.")
+            return team_hint
