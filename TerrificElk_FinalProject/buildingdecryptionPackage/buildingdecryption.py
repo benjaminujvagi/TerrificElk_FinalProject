@@ -9,17 +9,12 @@
 
 # Brief Description of what this module does. decrypts the building location 
 # Citations: Microsoft Copilot
-# buildingdecryption.py
-
-def read_words(file_path):
-    """
-    reads a text file and matches words with row number
-    @Param: String
-    """
-    with open(file_path, 'r', encoding='utf-8') as file:
-        words = file.readlines()
-    return [word.strip() for word in words]
-
-def decrypt_location(encrypted_numbers, words):
-    decrypted_message = ' '.join(words[int(num)] for num in encrypted_numbers)
-    return decrypted_message
+# buildingdecryption.py 
+import json 
+def get_group_numbers(json_file_path, group_name): 
+    with open(json_file_path, 'r', encoding='utf-8') as file: 
+        data = json.load(file) 
+    for group in data["groups"]: 
+        if group["name"] == group_name: 
+            return group["numbers"] 
+    return None
