@@ -27,8 +27,10 @@ import json
 
 def get_encrypted_movie_title(json_file_path, team_name):
     with open(json_file_path, 'r', encoding='utf-8') as file:
-        data = json.load(file)
-    for team in data["teams"]:
-        if team["name"] == team_name:
-            return team["encrypted_movie_title"]
-    return None
+           data = json.load(file)
+   
+    if team_name in data:
+        return data[team_name][0]
+    else:
+        return None
+     
