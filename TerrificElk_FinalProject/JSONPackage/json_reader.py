@@ -15,7 +15,10 @@ class JSONDecryptor:
             return data
 
     def decrypt_data(self, encrypted_data):
-        decrypted_data = self.fernet.decrypt(encrypted_data.encode()).decode()
+        if isinstance(encrypted_data, list):
+            decrypted_data = [self.fernet.decrypt(item.encode()).decode() for item in encrypted_data]
+        else:
+            decrypted_data = self.fernet.decrypt(encrypted_data.encode()).decode()
         return decrypted_data
 
     def process_json(self):
